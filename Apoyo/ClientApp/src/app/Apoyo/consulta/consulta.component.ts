@@ -12,23 +12,25 @@ import { Persona } from '../models/persona';
 export class ConsultaComponent implements OnInit {
 
   persona: Persona;
+  total: number;
   constructor(private personaService: PersonaService, private apoyoService: ApoyoService) { }
 
   ngOnInit(): void {
+    this.Todos();
+    this.total = this.apoyoService.getSaldo();
   }
 
 
   Todos(){
-    var i;
+    var i: number;
     var personas: Persona[] = [];
-    var apoyo: Apoyo;
+    let apoyo: Apoyo;
     var cadenaTodos = "";
     
     personas = this.personaService.get();
 
     for (i = 0; i < personas.length; i++){
-
-
+        apoyo = this.apoyoService.buscarApoyo(personas[i]);
         cadenaTodos +=
         '<tr>' +
             '<td >' + personas[i].identificacion + '</td>' +
@@ -38,6 +40,7 @@ export class ConsultaComponent implements OnInit {
             '<td>' + personas[i].sexo+ '</td>' +
             '<td>' + personas[i].departamento+ '</td>' +
             '<td>' + personas[i].ciudad+ '</td>' +
+            '<td>' + apoyo.valor+ '</td>' +
             '</tr>';
     }
     document.getElementById("tdPulsaciones").innerHTML= cadenaTodos;

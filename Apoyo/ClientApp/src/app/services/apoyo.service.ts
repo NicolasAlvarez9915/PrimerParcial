@@ -55,12 +55,19 @@ export class ApoyoService {
   }
 
   buscarApoyo(persona: Persona): Apoyo{
+    
     let apoyos = [];
     let apoyo: Apoyo;
     let i: number;
     if (this.get() != null) {
       apoyos = this.get();
     }
-    return apoyo;
+    for (i = 0; apoyos.length; i++){
+      if(apoyos[i].persona === persona.identificacion){
+        apoyo = apoyos[i];
+        return apoyo;
+      }
+    }
+    return null;
   }
 }
