@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Apoyo } from '../Apoyo/models/apoyo';
+import { Persona } from '../Apoyo/models/persona';
 
 @Injectable({
   providedIn: 'root'
@@ -35,16 +36,31 @@ export class ApoyoService {
     Saldo += apoyo.valor;
     localStorage.setItem('Saldo', JSON.stringify(Saldo));
   }
-  getSaldo(): number {
+  getSaldo(){
     let Saldo: number;
-    Saldo = parseInt(JSON.parse(localStorage.getItem('SaldoApoyo')));
+    Saldo = JSON.parse(localStorage.getItem('Saldo'));
+    if (Saldo === null){
+      Saldo = 0;
+    }
     return Saldo;
   }
 
   validarSaldo(apoyo: Apoyo){
-    if (this.getSaldo()+apoyo.valor > 600000000){
+    let Saldo: number;
+    Saldo = this.getSaldo();
+    if (Saldo+apoyo.valor > 600000000){
       return true;
     }
     return false;
+  }
+
+  buscarApoyo(persona: Persona): Apoyo{
+    let apoyos = [];
+    let apoyo: Apoyo;
+    let i: number;
+    if (this.get() != null) {
+      apoyos = this.get();
+    }
+    return apoyo;
   }
 }

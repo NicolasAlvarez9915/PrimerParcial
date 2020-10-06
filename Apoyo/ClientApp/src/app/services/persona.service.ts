@@ -25,9 +25,10 @@ export class PersonaService {
   }
 
   validarExistencia(persona: Persona){
-    let personas = [];
+    let personas: Persona[] = [];
     let i: number;
     if (this.get() != null) {
+      personas = this.get();
       for ( i = 0; i < personas.length; i++){
         if(personas[i].identificacion === persona.identificacion){
           return true;
