@@ -6,13 +6,13 @@ import { Persona } from '../Apoyo/models/persona';
 })
 export class PersonaService {
 
-  personas: Persona[];
-  i: number;
+
+  
   constructor() { }
 
   get(): Persona[] {
-    this.personas = JSON.parse(localStorage.getItem('Personas'));
-    return this.personas;
+    let personas = JSON.parse(localStorage.getItem('Personas'));
+    return personas;
   }
   
   post(persona: Persona) {
@@ -21,14 +21,15 @@ export class PersonaService {
       personas = this.get();
     }
     personas.push(persona);
-    localStorage.setItem('Personas', JSON.stringify(this.personas));
+    localStorage.setItem('Personas', JSON.stringify(personas));
   }
 
   validarExistencia(persona: Persona){
-    this.personas = [];
+    let personas = [];
+    let i: number;
     if (this.get() != null) {
-      for ( this.i = 0; this.i < this.personas.length; this.i++){
-        if(this.personas[this.i].identificacion === persona.identificacion){
+      for ( i = 0; i < personas.length; i++){
+        if(personas[i].identificacion === persona.identificacion){
           return true;
         }
       }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ApoyoService } from 'src/app/services/apoyo.service';
 import { PersonaService } from 'src/app/services/persona.service';
 import { Apoyo } from '../models/apoyo';
 import { Persona } from '../models/persona';
@@ -13,7 +14,7 @@ export class RegistroComponent implements OnInit {
   persona: Persona;
   apoyo: Apoyo;
 
-  constructor(private personaService: PersonaService) { 
+  constructor(private personaService: PersonaService, private apoyoService: ApoyoService) { 
     
   }
 
@@ -68,10 +69,16 @@ export class RegistroComponent implements OnInit {
 
   registrar(){
     if(this.personaService.validarExistencia(this.persona)){
-      alert("Ya existe una persona registrada con esta identificacion.")
+      alert("Ya existe una persona registrada con esta identificacion.");
     }else{
-      this.personaService.post(this.persona);
-      alert("Registrado correctamente.");
+      if(this.apoyoService.validarSaldo(this.apoyo)){
+        alert("Excede el limite estrablecido por el gobierno.")
+      }else{
+        this.personaService.post(this.persona);
+        this.apoyo.persona = this.persona.identificacion;
+        this.apoyoService.post(this.apoyo);
+        alert("Registrado correctamente."+ this.persona.identificacion);
+      }
     }
   }
 }

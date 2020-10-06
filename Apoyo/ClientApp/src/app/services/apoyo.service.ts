@@ -6,21 +6,45 @@ import { Apoyo } from '../Apoyo/models/apoyo';
 })
 export class ApoyoService {
 
-  apoyos: Apoyo[];
+  
   constructor() { }
 
   get(): Apoyo[] {
-    this.apoyos = [];
-    this.apoyos = JSON.parse(localStorage.getItem('Apoyos'));
-    return this.apoyos;
+    let apoyos = [];
+    apoyos = JSON.parse(localStorage.getItem('Apoyos'));
+    return apoyos;
   }
   
   post(apoyo: Apoyo) {
-    this.apoyos = [];
+    let apoyos = [];
     if (this.get() != null) {
-      this.apoyos = this.get();
+      apoyos = this.get();
     }
-    this.apoyos.push(apoyo);
-    localStorage.setItem('Apoyos', JSON.stringify(this.apoyos));
+    apoyos.push(apoyo);
+    this.postSaldo(apoyo);  
+    localStorage.setItem('Apoyos', JSON.stringify(apoyos));
+  }
+
+  postSaldo(apoyo: Apoyo){
+    let Saldo: number;
+    if (this.getSaldo() === null) {
+      Saldo = 0;
+    }else{
+      Saldo = this.getSaldo();
+    }
+    Saldo += apoyo.valor;
+    localStorage.setItem('Saldo', JSON.stringify(Saldo));
+  }
+  getSaldo(): number {
+    let Saldo: number;
+    Saldo = parseInt(JSON.parse(localStorage.getItem('SaldoApoyo')));
+    return Saldo;
+  }
+
+  validarSaldo(apoyo: Apoyo){
+    if (this.getSaldo()+apoyo.valor > 600000000){
+      return true;
+    }
+    return false;
   }
 }

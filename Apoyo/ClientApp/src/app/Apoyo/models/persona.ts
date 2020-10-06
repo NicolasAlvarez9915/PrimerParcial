@@ -1,8 +1,8 @@
 export class Persona {
-    identificacion: String;
-    nombres: String;
+    identificacion: string;
+    nombres: string;
     apellidos: string; 
-    sexo: String;
+    sexo: string;
     edad: number;
     departamento: string;
     ciudad: string;
