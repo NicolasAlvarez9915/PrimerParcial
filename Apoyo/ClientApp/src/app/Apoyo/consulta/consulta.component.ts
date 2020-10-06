@@ -4,6 +4,7 @@ import { PersonaService } from 'src/app/services/persona.service';
 import { Apoyo } from '../models/apoyo';
 import { Persona } from '../models/persona';
 
+
 @Component({
   selector: 'app-consulta',
   templateUrl: './consulta.component.html',
@@ -12,12 +13,9 @@ import { Persona } from '../models/persona';
 export class ConsultaComponent implements OnInit {
 
   persona: Persona;
-  total: number;
   constructor(private personaService: PersonaService, private apoyoService: ApoyoService) { }
 
   ngOnInit(): void {
-    this.Todos();
-    this.total = this.apoyoService.getSaldo();
   }
 
 
@@ -31,6 +29,7 @@ export class ConsultaComponent implements OnInit {
 
     for (i = 0; i < personas.length; i++){
         apoyo = this.apoyoService.buscarApoyo(personas[i]);
+        alert(apoyo.valor);
         cadenaTodos +=
         '<tr>' +
             '<td >' + personas[i].identificacion + '</td>' +
@@ -41,6 +40,8 @@ export class ConsultaComponent implements OnInit {
             '<td>' + personas[i].departamento+ '</td>' +
             '<td>' + personas[i].ciudad+ '</td>' +
             '<td>' + apoyo.valor+ '</td>' +
+            '<td>' + apoyo.tipo+ '</td>' +
+            '<td>' + apoyo.fecha+ '</td>' +
             '</tr>';
     }
     document.getElementById("tdPulsaciones").innerHTML= cadenaTodos;
