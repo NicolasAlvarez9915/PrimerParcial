@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { PersonaService } from 'src/app/services/persona.service';
 import { Apoyo } from '../models/apoyo';
 import { Persona } from '../models/persona';
 
@@ -12,13 +13,16 @@ export class RegistroComponent implements OnInit {
   persona: Persona;
   apoyo: Apoyo;
 
-  constructor() { }
+  constructor(private personaService: PersonaService) { 
+    
+  }
 
   ngOnInit(): void {
+    this.persona = new Persona;
+    this.apoyo = new Apoyo;
   }
 
   validarCampos(){
-    alert(this.persona.identificacion)
     if(this.persona.identificacion === undefined){
       alert("Debe ingresar la identificacion.");
     }else{
@@ -44,12 +48,12 @@ export class RegistroComponent implements OnInit {
                     alert("Debe seleccionar un tipo de apoyo.");
                   }else{
                     if(this.apoyo.valor == undefined){
-                      alert("Debe ingresar un vallor.");
+                      alert("Debe ingresar un valor.");
                     }else{
                       if(this.apoyo.fecha == undefined){
                         alert("Debe ingresar una fecha.");
                       }else{
-                        alert("Todo correcto.");
+                        this.registrar();
                       }
                     }
                   }
@@ -59,6 +63,15 @@ export class RegistroComponent implements OnInit {
           }
         }
       }
+    }
+  }
+
+  registrar(){
+    if(this.personaService.validarExistencia(this.persona)){
+      alert("Ya existe una persona registrada con esta identificacion.")
+    }else{
+      this.personaService.post(this.persona);
+      alert("Registrado correctamente.");
     }
   }
 }

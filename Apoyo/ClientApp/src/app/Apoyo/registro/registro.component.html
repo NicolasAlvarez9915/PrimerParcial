@@ -1,24 +1,25 @@
-<blockquote class="blockquote text-center  " >
+<blockquote class="blockquote" >
 <form >
   <div class="form-group">
     <label>Identificacion</label>
-    <input type="text" class="form-control" placeholder="Identificacion" [(ngModel)]="persona.identificacion">
+    <input type="text"  name="identificacion"  placeholder="Identificacion" [(ngModel)]="persona.identificacion" class="form-control" />
   </div>
 
   <div class="row">
     <div class="col">
       <label>Nombres</label>
-      <input type="text" class="form-control" placeholder="Nombres"[(ngModel)]="persona.nombres">
+      <input type="text"  name="nombres"  placeholder="Nombres" [(ngModel)]="persona.nombres" class="form-control" />
+      
     </div>
     <div class="col">
       <label>Apellidos</label>
-      <input type="text" class="form-control" placeholder="Apellidos" [(ngModel)]="persona.apellidos" >
+      <input type="text"  name="apellidos"  placeholder="Apellidos" [(ngModel)]="persona.apellidos" class="form-control" />
     </div>
   </div>
 
   <div class="form-group">
     <label for="exampleFormControlSelect1">Sexo</label>
-    <select class="form-control" id="exampleFormControlSelect1" [(ngModel)]="persona.sexo">
+    <select name="SlcSexo"  class="form-control" id="inlineFormCustomSelectPref" [(ngModel)]="persona.sexo" >
       <option value="F">Femenino</option>
       <option value="M">Masculino</option>
     </select>
@@ -26,17 +27,17 @@
 
   <div class="form-group">
     <label>Edad</label>
-    <input type="number" class="form-control" placeholder="0" [(ngModel)]="persona.edad">
+    <input type="number"  name="edad"   placeholder="0" [(ngModel)]="persona.edad" class="form-control" />
   </div>
 
   <div class="row">
     <div class="col">
       <label>Departamento</label>
-      <input type="text" class="form-control" placeholder="Departamento" [(ngModel)]="persona.departamento">
+      <input type="text"  name="departamento"  placeholder="Departamento" [(ngModel)]="persona.departamento" class="form-control" />
     </div>
     <div class="col">
       <label>Ciudad</label>
-      <input type="text" class="form-control" placeholder="Ciudad" [(ngModel)]="persona.ciudad">
+      <input type="text"  name="ciudad"  placeholder="Ciudad" [(ngModel)]="persona.ciudad" class="form-control" />
     </div>
   </div>
 
@@ -44,7 +45,7 @@
 
   <div class="form-group">
     <label for="exampleFormControlSelect1">Tipo de apoyo</label>
-    <select class="form-control" id="exampleFormControlSelect1" [(ngModel)]="apoyo.tipo">
+    <select name="SlcSexo"  class="form-control" id="inlineFormCustomSelectPref" [(ngModel)]="apoyo.tipo">
       <option value="A">Alimentario</option>
       <option value="E">Economico</option>
     </select>
@@ -52,12 +53,12 @@
 
   <div class="form-group">
     <label>Valor</label>
-    <input type="number" class="form-control" placeholder="0" [(ngModel)]="apoyo.valor">
+    <input type="number"  name="valor"   placeholder="0" [(ngModel)]="apoyo.valor" class="form-control" />
   </div>
 
   <div class="form-group">
     <label>Fecha</label>
-    <input type="text" class="form-control" placeholder="Fecha" [(ngModel)]="apoyo.fecha">
+    <input type="text"  name="fecha"  placeholder="Fecha" [(ngModel)]="apoyo.fecha" class="form-control" />
   </div>
 
   <button type="button" class="btn btn-info" id="btnRegistrar" (click)="validarCampos()">
